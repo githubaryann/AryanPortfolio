@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aryan Sagar Singh — Portfolio</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap');
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#080a0e;--bg2:#0d1117;--surface:#111620;--accent:#00e5ff;--accent2:#7c3aed;--accent3:#f59e0b;--text:#e2e8f0;--muted:#64748b;--border:rgba(255,255,255,0.07);--glow:0 0 40px rgba(0,229,255,0.15)}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Space Mono','Courier New',monospace;cursor:none;overflow-x:hidden}
+#cursor{position:fixed;width:12px;height:12px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s;left:-100px;top:-100px}
+#cursor-ring{position:fixed;width:40px;height:40px;border:1.5px solid var(--accent);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width .25s,height .25s,border-color .25s;left:-100px;top:-100px}
+#cursor.hovered{width:6px;height:6px;background:var(--accent3)}
+#cursor-ring.hovered{width:70px;height:70px;border-color:var(--accent3)}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
+ 
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:900;display:flex;justify-content:space-between;align-items:center;padding:1.5rem 4rem;background:rgba(8,10,14,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:var(--accent);letter-spacing:-.02em}
+.nav-links{display:flex;gap:2rem}
+.nav-links a{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;position:relative;cursor:none}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--accent);transition:width .3s ease}
+.nav-links a:hover{color:var(--text)}
+.nav-links a:hover::after{width:100%}
+ 
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;padding:8rem 4rem 4rem;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 60% 50% at 70% 50%,rgba(0,229,255,.06) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 20% 80%,rgba(124,58,237,.08) 0%,transparent 70%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:60px 60px}
+.hero-content{position:relative;z-index:1;max-width:900px}
+.status-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.2);padding:.4rem 1rem;font-size:.68rem;letter-spacing:.1em;color:var(--accent);margin-bottom:1.5rem;text-transform:uppercase}
+.status-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 1.5s ease infinite}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,229,255,.4)}50%{box-shadow:0 0 0 6px rgba(0,229,255,0)}}
+.hero-tag{display:inline-flex;align-items:center;gap:.5rem;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:2rem}
+.hero-tag span{display:inline-block;width:2rem;height:1px;background:var(--accent)}
+.hero-name{font-family:'Syne',sans-serif;font-size:clamp(3.5rem,9vw,7rem);font-weight:800;line-height:.95;letter-spacing:-.03em;color:var(--text);margin-bottom:.5rem}
+.hero-name .highlight{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-role{font-size:.85rem;letter-spacing:.1em;color:var(--muted);margin:1.5rem 0 2.5rem;text-transform:uppercase}
+.hero-desc{max-width:560px;color:var(--muted);font-size:.85rem;line-height:1.8;margin-bottom:3rem}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{padding:.9rem 2rem;background:var(--accent);color:#080a0e;font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.05em;text-decoration:none;display:inline-block;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));transition:all .2s;cursor:none}
+.btn-primary:hover{background:var(--accent3);transform:translateY(-2px)}
+.btn-outline{padding:.9rem 2rem;background:transparent;color:var(--text);font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.05em;text-decoration:none;border:1px solid var(--border);display:inline-block;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));transition:all .2s;cursor:none}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+.hero-scroll{position:absolute;bottom:3rem;right:4rem;display:flex;flex-direction:column;align-items:center;gap:.5rem;color:var(--muted);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase}
+.scroll-line{width:1px;height:80px;background:linear-gradient(to bottom,var(--accent),transparent);animation:scrollPulse 2s ease-in-out infinite}
+@keyframes scrollPulse{0%,100%{opacity:.3}50%{opacity:1}}
+ 
+/* SECTIONS */
+section{padding:7rem 4rem}
+.section-label{display:flex;align-items:center;gap:1rem;font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+.section-label::after{content:'';flex:1;height:1px;background:linear-gradient(to right,var(--accent),transparent);max-width:200px}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:800;letter-spacing:-.02em;color:var(--text);margin-bottom:4rem;line-height:1.1}
+ 
+/* EXPERIENCE */
+#experience{background:var(--bg2)}
+.exp-grid{display:grid;gap:1.5px}
+.exp-item{background:var(--surface);padding:2.5rem 3rem;border-left:2px solid transparent;transition:all .3s;position:relative;overflow:hidden}
+.exp-item::before{content:'';position:absolute;top:0;left:0;bottom:0;width:0;background:linear-gradient(135deg,rgba(0,229,255,.05),transparent);transition:width .4s ease}
+.exp-item:hover{border-left-color:var(--accent)}
+.exp-item:hover::before{width:100%}
+.exp-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.75rem;flex-wrap:wrap;gap:1rem}
+.exp-role{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;color:var(--text)}
+.exp-period{font-size:.7rem;letter-spacing:.1em;color:var(--accent);background:rgba(0,229,255,.08);padding:.3rem .75rem;border:1px solid rgba(0,229,255,.2)}
+.exp-company{font-size:.8rem;color:var(--muted);margin-bottom:1rem}
+.exp-desc{font-size:.8rem;color:var(--muted);line-height:1.8}
+ 
+/* CURRENTLY LEARNING */
+#learning{background:var(--bg)}
+.learning-header{display:flex;align-items:flex-start;justify-content:space-between;gap:2rem;margin-bottom:3rem;flex-wrap:wrap}
+.learning-meta{flex:1}
+.learning-course-title{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--text);margin-bottom:.5rem;line-height:1.2}
+.learning-platform{display:inline-flex;align-items:center;gap:.5rem;font-size:.75rem;color:var(--accent3);letter-spacing:.05em;margin-bottom:1rem}
+.learning-platform-dot{width:6px;height:6px;border-radius:50%;background:var(--accent3)}
+.learning-end{font-size:.72rem;color:var(--muted);letter-spacing:.05em}
+.progress-bar-wrap{margin-top:1.25rem;max-width:400px}
+.progress-label{display:flex;justify-content:space-between;font-size:.68rem;color:var(--muted);margin-bottom:.4rem;letter-spacing:.05em}
+.progress-track{height:4px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;transition:width 1.2s ease;animation:progressLoad 1.5s ease forwards}
+@keyframes progressLoad{from{width:0%}to{width:4%}}
+.modules-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem}
+.module-card{background:var(--surface);border:1px solid var(--border);padding:1.5rem 1.75rem;transition:all .3s;position:relative;overflow:hidden}
+.module-card:hover{border-color:rgba(0,229,255,.25);transform:translateY(-3px);box-shadow:var(--glow)}
+.module-card.active{border-color:rgba(0,229,255,.35);background:rgba(0,229,255,.04)}
+.module-card.active::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.module-top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:.6rem}
+.module-name{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;color:var(--text);line-height:1.3}
+.module-badge{flex-shrink:0;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .6rem;border-radius:20px;font-weight:700}
+.badge-active{background:rgba(0,229,255,.12);color:var(--accent);border:1px solid rgba(0,229,255,.3)}
+.badge-upcoming{background:rgba(100,116,139,.1);color:var(--muted);border:1px solid rgba(100,116,139,.2)}
+.module-date{font-size:.7rem;color:var(--muted);letter-spacing:.04em}
+.module-lock{font-size:.75rem;color:var(--muted);margin-top:.3rem;opacity:.5}
+ 
+/* SKILLS */
+#skills{background:var(--bg2)}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem}
+.skill-chip{background:var(--surface);border:1px solid var(--border);padding:1rem 1.25rem;font-size:.75rem;letter-spacing:.05em;color:var(--muted);transition:all .25s;position:relative;overflow:hidden}
+.skill-chip::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));transform:scaleX(0);transition:transform .3s ease}
+.skill-chip:hover{color:var(--text);border-color:var(--accent);transform:translateY(-3px);box-shadow:var(--glow)}
+.skill-chip:hover::before{transform:scaleX(1)}
+.skill-icon{font-size:1.2rem;margin-bottom:.5rem;display:block}
+ 
+/* ACCOMPLISHMENTS */
+#accomplishments{background:var(--bg)}
+.accom-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem}
+.accom-card{background:var(--surface);border:1px solid var(--border);padding:2rem;transition:all .3s;position:relative}
+.accom-card::after{content:'';position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 30px 30px 0;border-color:transparent var(--accent) transparent transparent;transition:border-color .3s}
+.accom-card:hover{border-color:rgba(0,229,255,.3);transform:translateY(-4px);box-shadow:var(--glow)}
+.accom-card:hover::after{border-color:transparent var(--accent3) transparent transparent}
+.accom-num{font-family:'Syne',sans-serif;font-size:3rem;font-weight:800;color:rgba(0,229,255,.1);line-height:1;margin-bottom:.75rem}
+.accom-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--text);margin-bottom:.75rem}
+.accom-desc{font-size:.78rem;color:var(--muted);line-height:1.7}
+ 
+/* EDUCATION */
+#education{background:var(--bg2)}
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.edu-card{background:var(--surface);border:1px solid var(--border);padding:2.5rem;position:relative;overflow:hidden;transition:all .3s}
+.edu-card:hover{border-color:rgba(124,58,237,.4);transform:translateY(-4px)}
+.edu-deg{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:.5rem}
+.edu-inst{font-size:.8rem;color:var(--accent2);margin-bottom:.4rem}
+.edu-period{font-size:.72rem;color:var(--muted);margin-bottom:1rem}
+.edu-detail{font-size:.78rem;color:var(--muted);line-height:1.7}
+ 
+/* CONTACT */
+#contact{background:var(--bg);text-align:center;position:relative;overflow:hidden}
+#contact::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 100%,rgba(0,229,255,.05),transparent)}
+#contact .section-label{justify-content:center}
+#contact .section-label::after{display:none}
+.contact-tagline{font-size:.85rem;color:var(--muted);margin-bottom:3rem;max-width:500px;margin-left:auto;margin-right:auto}
+.contact-links{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap}
+.contact-link{display:flex;align-items:center;gap:.6rem;padding:1rem 1.75rem;background:var(--surface);border:1px solid var(--border);color:var(--text);text-decoration:none;font-size:.78rem;letter-spacing:.05em;transition:all .25s;cursor:none;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px))}
+.contact-link:hover{background:rgba(0,229,255,.08);border-color:var(--accent);color:var(--accent);transform:translateY(-3px)}
+.contact-link svg{width:16px;height:16px;flex-shrink:0}
+ 
+/* FOOTER */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify-content:space-between;align-items:center;font-size:.7rem;color:var(--muted);letter-spacing:.1em}
+ 
+/* FADE UP */
+.fade-up{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+ 
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav{padding:1.25rem 1.5rem}
+  .nav-links{gap:1rem}
+  .nav-links a{font-size:.65rem}
+  #hero,section{padding-left:1.5rem;padding-right:1.5rem}
+  .exp-item{padding:2rem 1.5rem}
+  .edu-grid{grid-template-columns:1fr}
+  .hero-scroll{display:none}
+  .learning-header{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+ 
+<nav>
+  <div class="nav-logo">hey, it's aryan &#128075;</div>
+  <div class="nav-links">
+    <a href="#experience">Experience</a>
+    <a href="#learning">Learning</a>
+    <a href="#skills">Skills</a>
+    <a href="#accomplishments">Projects</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+ 
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="status-badge"><span class="status-dot"></span> Available for opportunities</div>
+    <div class="hero-tag"><span></span> Computer Science Engineer</div>
+    <h1 class="hero-name">Aryan<br><span class="highlight">Sagar Singh</span></h1>
+    <p class="hero-role">Software Developer &middot; Web Engineer &middot; AI Enthusiast</p>
+    <p class="hero-desc">Enthusiastic CSE graduate with a strong foundation in web development, Python, and Java &mdash; building responsive, user-focused digital experiences and constantly pushing the boundaries of what technology can do.</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary">Get In Touch</a>
+      <a href="#experience" class="btn-outline">View Work</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div><span>Scroll</span></div>
+</section>
+ 
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">02 &mdash; Work History</div>
+  <h2 class="section-title">Experience</h2>
+  <div class="exp-grid">
+    <div class="exp-item fade-up">
+      <div class="exp-header"><div class="exp-role">Software Development Intern</div><div class="exp-period">Jun 2025 &mdash; Present</div></div>
+      <div class="exp-company">JKLM Technologies Pvt Ltd &middot; New Delhi, Delhi</div>
+      <div class="exp-desc">Assisting in development and testing of software applications under senior developers. Participating in code reviews, debugging sessions, and contributing to feature design and implementation within collaborative Agile teams.</div>
+    </div>
+    <div class="exp-item fade-up">
+      <div class="exp-header"><div class="exp-role">Internship</div><div class="exp-period">Oct 2024 &mdash; Nov 2024</div></div>
+      <div class="exp-company">Prime &middot; New Delhi, Delhi</div>
+      <div class="exp-desc">Short-term engagement contributing to software development tasks, client-facing solutions, and documentation for project workflows and user guides.</div>
+    </div>
+    <div class="exp-item fade-up">
+      <div class="exp-header"><div class="exp-role">Work Student Intern</div><div class="exp-period">Sep 2022 &mdash; Nov 2022</div></div>
+      <div class="exp-company">Coincent &middot; Kochi, Kerala</div>
+      <div class="exp-desc">Assisted data scientists in developing machine learning models and collaborated with team members to analyze datasets using Python across various client-facing projects.</div>
+    </div>
+    <div class="exp-item fade-up">
+      <div class="exp-header"><div class="exp-role">Freelance Web Developer</div><div class="exp-period">6 Months</div></div>
+      <div class="exp-company">Self-Employed &middot; Remote</div>
+      <div class="exp-desc">Designed and deployed responsive websites for multiple clients, showcasing creativity, problem-solving ability, and delivering quality results within project timelines.</div>
+    </div>
+  </div>
+</section>
+ 
+<!-- CURRENTLY LEARNING -->
+<section id="learning">
+  <div class="section-label">03 &mdash; Currently Levelling Up</div>
+  <h2 class="section-title">Currently Learning</h2>
+  <div class="learning-header fade-up">
+    <div class="learning-meta">
+      <div class="learning-course-title">Advanced Certification in<br>Generative AI &amp; GenAI</div>
+      <div class="learning-platform"><span class="learning-platform-dot"></span> Coding Ninjas &mdash; classroom.codingninjas.com</div>
+      <div class="learning-end">&#128197; End date: 26 Mar, 2028</div>
+      <div class="progress-bar-wrap">
+        <div class="progress-label"><span>Overall Progress</span><span>In Progress</span></div>
+        <div class="progress-track"><div class="progress-fill"></div></div>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="modules-grid">
+    <!-- Module 1 - Active -->
+    <div class="module-card active fade-up">
+      <div class="module-top">
+        <div class="module-name">Prompt Engineering and API Integration</div>
+        <span class="module-badge badge-active">&#9654; Active</span>
+      </div>
+      <div class="module-date">&#128197; Start date: 26 Jun, 2026</div>
+    </div>
+ 
+    <!-- Module 2 -->
+    <div class="module-card fade-up">
+      <div class="module-top">
+        <div class="module-name">Basics of NLP and Retrieval-Augmented Generation (RAG)</div>
+        <span class="module-badge badge-upcoming">&#128274; Upcoming</span>
+      </div>
+      <div class="module-date">&#128197; Start date: 10 Aug, 2026</div>
+    </div>
+ 
+    <!-- Module 3 -->
+    <div class="module-card fade-up">
+      <div class="module-top">
+        <div class="module-name">AI Agents and Multi-Agent Systems</div>
+        <span class="module-badge badge-upcoming">&#128274; Upcoming</span>
+      </div>
+      <div class="module-date">&#128197; Start date: 24 Sep, 2026</div>
+    </div>
+ 
+    <!-- Module 4 -->
+    <div class="module-card fade-up">
+      <div class="module-top">
+        <div class="module-name">Deployment and Project Integration</div>
+        <span class="module-badge badge-upcoming">&#128274; Upcoming</span>
+      </div>
+      <div class="module-date">&#128197; Coming soon</div>
+    </div>
+  </div>
+</section>
+ 
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">04 &mdash; Technical Arsenal</div>
+  <h2 class="section-title">Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-chip fade-up"><span class="skill-icon">&#9749;</span>Java</div>
+    <div class="skill-chip fade-up"><span class="skill-icon">&#128013;</span>Python</div>
+    <div class="skill-chip fade-up"><span class="skill-icon">&#9881;&#65039;</span>C++</div>
+    <div class="skill-chip fade-up"><span class="skill-icon">&#127760;</span>HTML / CSS</div>
+    <div class="skill-chip fade-up"><span class="skill-icon">&#10024;</span>JavaScript</div>
+    <div class="skill-chip fade-up"><span class="skill-icon">&#128242;</span>Flutter</div>
+    <div class="skill-chip fade-up"><span class="skill-icon">&#129302;</span>Machine Learning</div>
+    <div class="skill-chip fade-up"><span class="skill-icon">&#128451;&#65039;</span>SQL</div>
+    <div class="skill-chip fade-up"><span class="skill-icon">&#128295;</span>Git / GitHub</div>
+    <div class="skill-chip fade-up"><span class="skill-icon">&#128161;</span>IoT / Embedded</div>
+    <div class="skill-chip fade-up"><span class="skill-icon">&#129513;</span>Problem Solving</div>
+    <div class="skill-chip fade-up"><span class="skill-icon">&#129309;</span>Teamwork</div>
+    <div class="skill-chip fade-up"><span class="skill-icon">&#129302;</span>Generative AI</div>
+    <div class="skill-chip fade-up"><span class="skill-icon">&#128172;</span>Prompt Engineering</div>
+  </div>
+</section>
+ 
+<!-- ACCOMPLISHMENTS -->
+<section id="accomplishments">
+  <div class="section-label">05 &mdash; Notable Work</div>
+  <h2 class="section-title">Accomplishments</h2>
+  <div class="accom-grid">
+    <div class="accom-card fade-up"><div class="accom-num">01</div><div class="accom-title">Final Year Project &mdash; Smart Road Safety System</div><div class="accom-desc">Developed a Mobile Phone Detection &amp; Alcohol Detection system with Engine Locking to enhance road safety using embedded systems and IoT-based sensors.</div></div>
+    <div class="accom-card fade-up"><div class="accom-num">02</div><div class="accom-title">Advanced Certification in GenAI &mdash; Coding Ninjas</div><div class="accom-desc">Currently pursuing an advanced certification covering Prompt Engineering, NLP, RAG, AI Agents, Multi-Agent Systems, and Deployment. Active batch since Jun 2026.</div></div>
+    <div class="accom-card fade-up"><div class="accom-num">03</div><div class="accom-title">Flutter App Development Workshop</div><div class="accom-desc">Attended a hands-on workshop on cross-platform mobile app development using Flutter, building practical skills in UI/UX and app architecture.</div></div>
+    <div class="accom-card fade-up"><div class="accom-num">04</div><div class="accom-title">THATHVA'24 &mdash; NIT Calicut</div><div class="accom-desc">Participated in the Android App Development Event at NIT Calicut, collaborating with peers to build innovative mobile solutions under competitive conditions.</div></div>
+    <div class="accom-card fade-up"><div class="accom-num">05</div><div class="accom-title">Python Bootcamp &mdash; GeeksforGeeks</div><div class="accom-desc">Completed a comprehensive Python Bootcamp course strengthening core programming skills, algorithmic thinking, and data structures knowledge.</div></div>
+    <div class="accom-card fade-up"><div class="accom-num">06</div><div class="accom-title">Freelance Web Projects</div><div class="accom-desc">Delivered 6 months of freelancing in web development &mdash; designing and deploying responsive, modern websites for real clients with measurable results.</div></div>
+  </div>
+</section>
+ 
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-label">06 &mdash; Academic Background</div>
+  <h2 class="section-title">Education</h2>
+  <div class="edu-grid">
+    <div class="edu-card fade-up"><div class="edu-deg">B.Tech in Computer Science</div><div class="edu-inst">St. Thomas Institute For Science And Technology</div><div class="edu-period">November 2021 &mdash; June 2025 &middot; Trivandrum</div><div class="edu-detail">Coursework covering algorithms, data structures, software engineering, and AI. Excelled in Java, C++, Python, and SQL with numerous hands-on project completions.</div></div>
+    <div class="edu-card fade-up"><div class="edu-deg">12th CBSE &mdash; Science Stream</div><div class="edu-inst">Salwan Public School</div><div class="edu-period">September 2021 &middot; Delhi</div><div class="edu-detail">76% &mdash; Physics, Chemistry, Mathematics &amp; Bio-Tech (PCMB). Strong foundation in analytical thinking, problem-solving, and scientific reasoning.</div></div>
+  </div>
+</section>
+ 
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">07 &mdash; Let's Talk</div>
+  <h2 class="section-title" style="margin-bottom:1rem">Get In Touch</h2>
+  <p class="contact-tagline">Open to new opportunities, collaborations, or just a good tech conversation. Let's build something great.</p>
+  <div class="contact-links">
+    <a href="mailto:workwitharyan29@gmail.com" class="contact-link"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>workwitharyan29@gmail.com</a>
+    <a href="tel:09312350096" class="contact-link"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 012 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.12.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.58 2.81.7A2 2 0 0122 16.92z"/></svg>+91 93123 50096</a>
+    <a href="https://www.linkedin.com/in/aryan-sagarsingh-277503252" target="_blank" class="contact-link"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn</a>
+    <a href="https://github.com/githubaryann" target="_blank" class="contact-link"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>GitHub</a>
+  </div>
+</section>
+ 
+<footer>
+  <span>&#169; 2025 Aryan Sagar Singh</span>
+  <span></span>
+</footer>
+ 
+<script>
+var cursor = document.getElementById('cursor');
+var ring = document.getElementById('cursor-ring');
+var mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+ 
+document.addEventListener('mousemove', function(e) {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  cursor.style.left = mouseX + 'px';
+  cursor.style.top = mouseY + 'px';
+});
+ 
+function animateRing() {
+  ringX += (mouseX - ringX) * 0.13;
+  ringY += (mouseY - ringY) * 0.13;
+  ring.style.left = ringX + 'px';
+  ring.style.top = ringY + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+ 
+var hoverEls = document.querySelectorAll('a, button, .skill-chip, .accom-card, .edu-card, .exp-item, .module-card');
+hoverEls.forEach(function(el) {
+  el.addEventListener('mouseenter', function() { cursor.classList.add('hovered'); ring.classList.add('hovered'); });
+  el.addEventListener('mouseleave', function() { cursor.classList.remove('hovered'); ring.classList.remove('hovered'); });
+});
+ 
+var fadeEls = document.querySelectorAll('.fade-up');
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry, i) {
+    if (entry.isIntersecting) {
+      setTimeout(function() { entry.target.classList.add('visible'); }, i * 100);
+    }
+  });
+}, { threshold: 0.1 });
+fadeEls.forEach(function(el) { observer.observe(el); });
+</script>
+</body>
+</html>
